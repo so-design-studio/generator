@@ -1,11 +1,13 @@
 #!/bin/bash
 
-export SO_GENERATOR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 export SO_TEMPLATE_DIR="$SO_GENERATOR_DIR/../template"
 export SO_PROJECT_DIR="$(pwd)/$1"
 export SO_PROJECT_SHORTNAME="$1"
 
-source "$SO_GENERATOR_DIR/shared.sh"
+function log {
+  echo
+  echo "so-generator: $1"
+}
 
 
 if [ "$#" -ne 1 ]; then
@@ -32,6 +34,9 @@ fi
 
 
 cd $SO_PROJECT_DIR
+
+log "git"
+git init
 
 log "npm & bower install"
 npm install

@@ -1,3 +1,4 @@
 #!/bin/bash
 
-lib/so-generator.sh "$1"
+export SO_GENERATOR_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/lib"
+"$SO_GENERATOR_DIR/so-generator.sh" "$1"
