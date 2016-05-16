@@ -1,0 +1,9 @@
+{
+  "name": "testing",
+  "description": "testing",
+  "main": "assets/scripts/main.jsx",
+  "private": true,
+  "dependencies": {
+    "normalize-css": "^3.0.3"
+  }
+}

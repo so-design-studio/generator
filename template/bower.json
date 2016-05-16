@@ -1,0 +1,9 @@
+{
+  "name": "@@SHORTNAME@@",
+  "description": "@@SHORTNAME@@",
+  "main": "assets/scripts/main.jsx",
+  "private": true,
+  "dependencies": {
+    "normalize-css": "^3.0.3"
+  }
+}

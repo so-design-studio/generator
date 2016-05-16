@@ -1,0 +1,44 @@
+// --- Big globals ---
+
+// Root font-size
+$s-base: 15px;
+
+// Padding
+$p: 1.5rem;
+
+
+// --- Breakpoints ---
+
+$s-desktop-xs: 800px;
+$s-desktop-s:  960px;
+$s-desktop-m:  1200px;
+$s-desktop-l:  1400px;
+
+$s-desktop:    $s-desktop-xs;
+
+
+// --- Shared component sizes ---
+
+// eg. $s-sidebar-width: 15rem;
+
+
+// --- Breakpoint mixins ---
+
+@mixin non-desktop {
+  @include breakpoint(max-width $s-desktop - 1) { @content; }
+}
+@mixin desktop {
+  @include breakpoint($s-desktop) { @content; }
+}
+@mixin desktop-xs {
+  @include breakpoint($s-desktop-xs) { @content; }
+}
+@mixin desktop-s {
+  @include breakpoint($s-desktop-s) { @content; }
+}
+@mixin desktop-m {
+  @include breakpoint($s-desktop-m) { @content; }
+}
+@mixin desktop-l {
+  @include breakpoint($s-desktop-l) { @content; }
+}
