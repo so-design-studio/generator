@@ -3,8 +3,8 @@
 import os
 import sys
 
-PROJECT_SHORTNAME = sys.argv[1]
-PROJECT_DIR = sys.argv[2]
+PROJECT_SHORTNAME = os.environ['SO_PROJECT_SHORTNAME']
+PROJECT_DIR = os.environ['SO_PROJECT_DIR']
 
 SUBSTITUTIONS = [
     ['SHORTNAME', PROJECT_SHORTNAME]
