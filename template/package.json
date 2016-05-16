@@ -20,6 +20,7 @@
     "mocha": "^2.4.2",
     "node-sass": "^3.4.2",
     "pixrem": "^3.0.0",
+    "postcss-flexibility": "^1.0.3",
     "postcss-loader": "^0.8.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
