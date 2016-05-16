@@ -1,8 +1,8 @@
 # So Generator
 
-Initialises a new Webpack boilerplate project.
-
 Usage:
 ```
 ./so-generator <project-name>
 ```
+
+Initialises a new Webpack boilerplate project in folder `project-name`.
