@@ -4,6 +4,7 @@
   "main": "assets/scripts/main.jsx",
   "private": true,
   "dependencies": {
-    "normalize-css": "^3.0.3"
+    "normalize-css": "^3.0.3",
+    "font-awesome": "^4.6.3"
   }
 }
