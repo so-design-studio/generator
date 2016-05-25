@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 var flexibility = require('postcss-flexibility');
+var lost = require('lost');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var pixrem = require('pixrem');
 var path = require('path');
@@ -73,7 +74,7 @@ module.exports = {
   },
 
   postcss: function() {
-    return [autoprefixer, flexibility, pixrem];
+    return [lost, autoprefixer, flexibility, pixrem];
   },
 };
 
