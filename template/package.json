@@ -41,8 +41,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://gitlab.com/so-design/@@SHORTNAME@@.git"
+    "url": "gitlab:so-design/@@SHORTNAME@@"
   },
   "author": "So Design",
-  "license": "ISC"
+  "license": "UNLICENSED",
+  "private": true
 }
