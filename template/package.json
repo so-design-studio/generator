@@ -36,8 +36,8 @@
     "webpack-dev-server": "^1.14.1"
   },
   "scripts": {
-    "test": "mocha",
-    "build": "NODE_ENV=\"production\" npm run test && NODE_ENV=\"production\" webpack -p",
+    "test": "NODE_ENV=\"production\" mocha",
+    "build": "NODE_ENV=\"production\" webpack -p",
     "watch": "NODE_ENV=\"development\" node lib/webpack.dev.server.js"
   },
   "repository": {
