@@ -31,12 +31,12 @@ module.exports = {
       {
         // Inline our standard CSS
         test: /\.css$/,
-        loaders: ['style', 'css', 'postcss']
+        loaders: ['style', 'css', 'postcss', 'resolve-url']
       },
       {
         // Compile and inline our Sass
         test: /\.s[ac]ss$/,
-        loaders: ['style', 'css', 'postcss', 'sass']
+        loaders: ['style', 'css', 'postcss', 'sass', 'resolve-url']
       },
       {
         test: /\.json$/,
@@ -100,8 +100,8 @@ if(process.env.NODE_ENV === 'production') {
   // Use extract text plugin
   module.exports.module.loaders[1].loaders = undefined;
   module.exports.module.loaders[2].loaders = undefined;
-  module.exports.module.loaders[1].loader = ExtractTextPlugin.extract('style', ['css', 'postcss']);
-  module.exports.module.loaders[2].loader = ExtractTextPlugin.extract('style', ['css', 'postcss', 'sass']);
+  module.exports.module.loaders[1].loader = ExtractTextPlugin.extract('style', ['css', 'postcss', 'resolve-url']);
+  module.exports.module.loaders[2].loader = ExtractTextPlugin.extract('style', ['css', 'postcss', 'sass', 'resolve-url']);
 
   // Remove recordsPath
   module.exports.recordsPath = undefined;
