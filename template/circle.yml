@@ -1,44 +1,47 @@
 machine:
-  node:
-    version: 5.6.0
   python:
-    version: 2.7.10
-
-  environment:
-    DEPLOY_FROM_DIR: deploy
-    DEPLOY_ANSIBLE_REPO_URL: "git@github.com:so-design-studio/so-ops.git"
+    version: 2.7.11
+  node:
+    version: 6.1.0
+  # php:
+  #   version: 7.0.7
+  # ruby:
+  #   version: ruby-2.3.1
 
 dependencies:
   cache_directories:
     - front/node_modules
     - front/bower_components
+    # - back/vendor
   post:
     - npm install -g bower
-    - cd assets && npm install && bower install
-    - cd assets && npm run build
+    - cd front && npm install && bower install
+    - cd front && npm run build
+    # - cd back && composer install
+    # - cd back && bundle install && bundle package --all && bundle binstubs puma --path ./sbin
+    # - cd back && sed -i -e 's/^BUNDLE_PATH.*$/BUNDLE_PATH: "vendor\/bundle"/g' .bundle/config
+    # - cd back && bin/rails assets:precompile
 
     - mkdir deploy
     - cp -R front/public deploy/front
     - cp -R back deploy/back
 
-    - git clone "$DEPLOY_ANSIBLE_REPO_URL" $HOME/ansible && $_/deploy-prep.sh
+    - git clone "git@github.com:so-design-studio/so-ops.git" $HOME/ops && $_/bin/deploy --prep
 
 test:
   override:
-    - cd assets && npm test
+    - cd front && npm test
+    # - cd back && phpunit
+    # - cd back && bin/rails test
 
 deployment:
   production:
     branch: master
     commands:
-      - $HOME/ansible/deploy.sh:
-          environment:
-            DEPLOY_TO_TAGS: craft
-            DEPLOY_ENV:     production
+      - $HOME/ops/bin/deploy production compute-@@SHORTNAME@@
   staging:
     branch: develop
     commands:
-      - $HOME/ansible/deploy.sh:
-          environment:
-            DEPLOY_TO_TAGS: craft
-            DEPLOY_ENV:     staging
+      - $HOME/ops/bin/deploy staging compute-staging
+
+# see so-ops/bin/deploy for deployment strategies other than ansistrano
