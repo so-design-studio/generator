@@ -38,9 +38,4 @@ cd "$SO_PROJECT_DIR"
 log "git"
 git init
 
-log "npm & bower install"
-npm install
-bower install
-
-log "please add the following to your hostfile: \"127.0.0.1 $1.dev\""
 echo
