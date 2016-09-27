@@ -33,7 +33,7 @@ if [ $? -ne 0 ]; then
 fi
 
 
-cd $SO_PROJECT_DIR
+cd "$SO_PROJECT_DIR"
 
 log "git"
 git init
