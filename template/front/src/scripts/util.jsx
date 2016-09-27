@@ -1,6 +1,8 @@
 // --- SoUtils ---
 // Lots of these from: youmightnotneedjquery.com
 
+let counter = 0;
+
 module.exports = {
 
   // jQuery(fn) replacement
@@ -43,5 +45,7 @@ module.exports = {
       }
     }
   },
+
+  id: () => counter++;
 
 };
