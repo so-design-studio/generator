@@ -2,3 +2,10 @@ node_modules
 bower_components
 
 npm-debug.log
+
+# built assets
+front/public/*
+
+# commit ie stuff and kitchen sinks
+!front/public/ie*
+!front/public/*.html

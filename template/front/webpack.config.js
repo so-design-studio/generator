@@ -1,15 +1,15 @@
-var webpack = require('webpack');
-var autoprefixer = require('autoprefixer');
-var flexibility = require('postcss-flexibility');
-var lost = require('lost');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var pixrem = require('pixrem');
-var path = require('path');
+const webpack = require('webpack');
+const autoprefixer = require('autoprefixer');
+const flexibility = require('postcss-flexibility');
+const lost = require('lost');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const pixrem = require('pixrem');
+const path = require('path');
 
 module.exports = {
 
   entry: {
-    main: ['./assets/scripts/main.jsx', 'webpack/hot/only-dev-server'],
+    main: ['./src/scripts/main.jsx', 'webpack/hot/only-dev-server'],
   },
   output: {
     path: __dirname + '/public/',

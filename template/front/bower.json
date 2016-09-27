@@ -4,8 +4,8 @@
   "main": "assets/scripts/main.jsx",
   "private": true,
   "dependencies": {
-    "reset-css": "^2.0.2011012603",
+    "reset-css": "^2.2.0",
     "font-awesome": "^4.6.3",
-    "compass-breakpoint": "breakpoint-sass#^2.6.1"
+    "compass-breakpoint": "breakpoint-sass#^2.7.0"
   }
 }
