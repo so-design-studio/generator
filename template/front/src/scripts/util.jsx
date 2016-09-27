@@ -26,6 +26,9 @@ module.exports = {
 
   deleteEl: (element) => element.parentNode.removeChild(element),
 
+  // document.getElementById() is long
+  findId: document.getElementById,
+
   // jQuery.toggleClass() replacement. toggled param is mandatory because redux
   toggleClass: (el, className, toggled) => {
     if(toggled) {
