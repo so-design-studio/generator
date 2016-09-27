@@ -13,13 +13,16 @@ module.exports = {
     }
   },
 
-  // Can't do a forEach() on querySelectorAll(), so this instead
-  forEachElementIn: (parent, selector, fn) => {
-    const elements = parent.querySelectorAll(selector);
+  // jQuery(s), jQuery.find(s) and jQuery.each(e) replacements
+  find:    (selector, parent = document.body) => parent.querySelector(selector),
+  findAll: (selector, parent = document.body) => parent.querySelectorAll(selector),
+  eachEl: (elements, fn) => {
     for(var i = 0; i < elements.length; i++) {
       fn(elements[i]);
     }
   },
+
+  deleteEl: (element) => element.parentNode.removeChild(element),
 
   // jQuery.toggleClass() replacement. toggled param is mandatory because redux
   toggleClass: (el, className, toggled) => {
