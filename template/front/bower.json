@@ -1,7 +1,7 @@
 {
   "name": "@@SHORTNAME@@",
   "description": "@@SHORTNAME@@",
-  "main": "assets/scripts/main.jsx",
+  "main": "src/scripts/main.jsx",
   "private": true,
   "dependencies": {
     "reset-css": "^2.2.0",
