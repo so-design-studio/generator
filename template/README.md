@@ -4,21 +4,21 @@
 
 - Install dependencies:
   ```
-  $ cd front && npm install && bower install
+  bin/prep
   ```
 - Append to your hosts file:
   ```
-  127.0.0.1 @@SHORTNAME@@.dev
-  127.0.0.1 assets.@@SHORTNAME@@.dev
+  127.0.0.1 so-@@SHORTNAME@@.dev
+  127.0.0.1 assets.@@OPS_NAMESPACE@@-@@SHORTNAME@@.dev
   ```
-- Append to your virtual hosts config:
+- Append to your Apache vhosts config:
   ```
   <VirtualHost *:80>
-    ServerName @@SHORTNAME@@.dev
+    ServerName @@OPS_NAMESPACE@@-@@SHORTNAME@@.dev
     DocumentRoot "@@PATH@@/back/public"
   </VirtualHost>
   <VirtualHost *:80>
-    ServerName assets.@@SHORTNAME.dev
+    ServerName assets.@@OPS_NAMESPACE@@-@@SHORTNAME@@.dev
     DocumentRoot "@@PATH@@/front/public"
   </VirtualHost>
   ```
