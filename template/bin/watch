@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd "${0%/*}/.." # script is in bin/
+
+cd front
+npm run watch # &
+# cd back
+# rails s &
+# wait
