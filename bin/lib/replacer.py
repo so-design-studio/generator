@@ -16,6 +16,8 @@ SUBSTITUTIONS = [
 ]
 
 for folder, subs, files in os.walk(PROJECT_DIR):
+    if '.git' in folder:
+        continue
     for filename in files:
         contents = ''
         with open(os.path.join(folder, filename), 'r') as template:
