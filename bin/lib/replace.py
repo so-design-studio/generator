@@ -3,11 +3,16 @@
 import os
 import sys
 
-PROJECT_SHORTNAME = os.environ['SO_PROJECT_SHORTNAME']
-PROJECT_DIR = os.environ['SO_PROJECT_DIR']
+PROJECT_NAME = os.environ['PROJECT_NAME']
+PROJECT_DIR = os.environ['PROJECT_DIR']
+OPS_NAMESPACE = os.environ['OPS_NAMESPACE']
+REPO_URL = os.environ['REPO_URL']
+
 
 SUBSTITUTIONS = [
-    ['SHORTNAME', PROJECT_SHORTNAME]
+    ['NAME', PROJECT_NAME],
+    ['OPS_NAMESPACE', OPS_NAMESPACE],
+    ['REPO_URL', REPO_URL],
 ]
 
 for folder, subs, files in os.walk(PROJECT_DIR):

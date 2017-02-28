@@ -1,0 +1,107 @@
+#!/bin/bash
+
+export OPS_NAMESPACE="so"
+export TEMPLATE_DIR="${0%/*}/../template"
+export PROJECT_DIR="$(pwd)/$1"
+export PROJECT_NAME="$1"
+export REPO_URL="git@github.com:$SO_OPS_GITHUB_USER_OR_ORG/$PROJECT_NAME.git"
+
+function log {
+  echo
+  echo "--- $@"
+  echo
+}
+
+function usage {
+  echo "usage: $0 [--github] <name>"
+  exit 1
+}
+
+
+[ $# -lt 1 ] && usage
+[ $# -eq 1 ] && [ "$1" == '--github' ] && usage
+[ $# -gt 1 ] && [ "$1" != '--github' ] && usage
+
+
+if [ -d "$PROJECT_DIR" ]; then
+  echo "error: directory exists: $PROJECT_DIR"
+  exit 2
+fi
+
+
+if [ "$1" == '--github' ]; then
+  GITHUB=1
+fi
+
+
+log "prepare"
+if ! mkdir "$PROJECT_DIR" ; then
+  echo "error: couldn't create $PROJECT_DIR"
+  exit 3
+fi
+cd "$PROJECT_DIR"
+git init
+
+if [ ! -z "$GITHUB" ]; then
+  log "github: create repo"
+  if [ -z "$SO_OPS_GITHUB_ORG" ]; then
+    POST_TO="$SO_OPS_GITHUB_USER"
+  else
+    POST_TO="orgs/$SO_OPS_GITHUB_ORG"
+  fi
+  curl -u "$SO_OPS_GITHUB_USER:$SO_OPS_GITHUB_API_TOKEN" \
+  "https://api.github.com/$POST_TO/repos" \
+  --data "{
+    \"name\": \"$PROJECT_NAME\",
+    \"description\": \"TODO\",
+    \"homepage\": \"http://$OPS_NAMESPACE-$PROJECT_NAME.dev\",
+    \"private\": true
+  }"
+fi
+
+log "add readme on master"
+echo "# $PROJECT_NAME
+See \`develop\` branch." > README.md
+git add .
+git commit -m "initial"
+
+log "add git remote"
+git remote add origin "$REPO_URL"
+
+if [ ! -z "$GITHUB" ]; then
+  log "github: push master"
+  if ! git push --set-upstream origin master ; then
+    echo "error: couldn't push to github"
+    exit 4
+  fi
+fi
+
+log "branch to develop"
+git branch develop
+rm README.md
+
+log "duplicate project template"
+if ! cp -rf "$TEMPLATE_DIR" "$PROJECT_DIR" ; then
+  echo "error: couldn't duplicate project template"
+  exit 5
+fi
+
+log "template substitutions"
+if ! "${0%/*}/lib/replace.py" ; then
+  echo "error: template substitutions failed"
+  exit 6
+fi
+
+log "commit template files"
+git add .
+git commit -m "generate"
+
+if [ ! -z "$GITHUB" ]; then
+  log "github: push develop"
+  git push --set-upstream origin develop
+fi
+
+# which gittower > /dev/null && gittower .
+# which atom > /dev/null && atom .
+
+echo
