@@ -1,14 +1,13 @@
 #!/bin/bash
 
 export OPS_NAMESPACE="so"
-export TEMPLATE_DIR="${0%/*}/../template"
-export PROJECT_DIR="$(pwd)/$1"
-export PROJECT_NAME="$1"
-export REPO_URL="git@github.com:$SO_OPS_GITHUB_USER_OR_ORG/$PROJECT_NAME.git"
+export DEVELOP_BRANCH="develop"
+export TEMPLATE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../template"
+export REPLACER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/lib/replacer.py"
 
 function log {
   echo
-  echo "--- $@"
+  echo "--- generate: $@"
   echo
 }
 
@@ -22,6 +21,13 @@ function usage {
 [ $# -eq 1 ] && [ "$1" == '--github' ] && usage
 [ $# -gt 1 ] && [ "$1" != '--github' ] && usage
 
+if [ $# -eq 1 ]; then
+  export PROJECT_NAME="$1"
+else
+  export PROJECT_NAME="$2"
+fi
+export PROJECT_DIR="$(pwd)/$PROJECT_NAME"
+export REPO_URL="git@github.com:$SO_OPS_GITHUB_USER_OR_ORG/$PROJECT_NAME.git"
 
 if [ -d "$PROJECT_DIR" ]; then
   echo "error: directory exists: $PROJECT_DIR"
@@ -41,6 +47,7 @@ if ! mkdir "$PROJECT_DIR" ; then
 fi
 cd "$PROJECT_DIR"
 git init
+
 
 if [ ! -z "$GITHUB" ]; then
   log "github: create repo"
@@ -76,18 +83,19 @@ if [ ! -z "$GITHUB" ]; then
   fi
 fi
 
-log "branch to develop"
-git branch develop
+log "branch to $DEVELOP_BRANCH"
+git branch "$DEVELOP_BRANCH"
+git checkout "$DEVELOP_BRANCH"
 rm README.md
 
 log "duplicate project template"
-if ! cp -rf "$TEMPLATE_DIR" "$PROJECT_DIR" ; then
+if ! cp -rf "$TEMPLATE_DIR/" "$PROJECT_DIR" ; then
   echo "error: couldn't duplicate project template"
   exit 5
 fi
 
 log "template substitutions"
-if ! "${0%/*}/lib/replace.py" ; then
+if ! "$REPLACER" ; then
   echo "error: template substitutions failed"
   exit 6
 fi
@@ -100,6 +108,9 @@ if [ ! -z "$GITHUB" ]; then
   log "github: push develop"
   git push --set-upstream origin develop
 fi
+
+log "run prep script"
+bin/prep
 
 # which gittower > /dev/null && gittower .
 # which atom > /dev/null && atom .
