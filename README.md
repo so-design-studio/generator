@@ -1,4 +1,4 @@
-# So Generator
+# so-generator
 
 Usage:
 ```
