@@ -2,6 +2,8 @@
 
 export OPS_NAMESPACE="so"
 export DEVELOP_BRANCH="develop"
+export GITHUB_PROJECT_DESCRIPTION="New project. TODO: add description and tags"
+
 export TEMPLATE_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/../template"
 export REPLACER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )/lib/replacer.py"
 
@@ -60,7 +62,7 @@ if [ ! -z "$GITHUB" ]; then
   "https://api.github.com/$POST_TO/repos" \
   --data "{
     \"name\": \"$PROJECT_NAME\",
-    \"description\": \"TODO\",
+    \"description\": \"$GITHUB_PROJECT_DESCRIPTION\",
     \"homepage\": \"http://$OPS_NAMESPACE-$PROJECT_NAME.dev\",
     \"private\": true
   }"
@@ -68,7 +70,7 @@ fi
 
 log "add readme on master"
 echo "# $PROJECT_NAME
-See \`develop\` branch." > README.md
+See \`$DEVELOP_BRANCH\` branch." > README.md
 git add .
 git commit -m "initial"
 
@@ -105,8 +107,8 @@ git add .
 git commit -m "generate"
 
 if [ ! -z "$GITHUB" ]; then
-  log "github: push develop"
-  git push --set-upstream origin develop
+  log "github: push $DEVELOP_BRANCH"
+  git push --set-upstream origin "$DEVELOP_BRANCH"
 fi
 
 log "run prep script"
