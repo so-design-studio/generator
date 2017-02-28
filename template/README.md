@@ -15,15 +15,15 @@ bin/prep
 127.0.0.1 assets.@@OPS_NAMESPACE@@-@@NAME@@.dev
 ```
 
-- Append to your Apache vhosts config:
+- Append to your Apache vhosts config (make sure you change the paths):
 
 ```
 <VirtualHost *:80>
   ServerName @@OPS_NAMESPACE@@-@@NAME@@.dev
-  DocumentRoot "@@PATH@@/back/public"
+  DocumentRoot "<PATH>/@@NAME@@/back/public"
 </VirtualHost>
 <VirtualHost *:80>
   ServerName assets.@@OPS_NAMESPACE@@-@@NAME@@.dev
-  DocumentRoot "@@PATH@@/front/public"
+  DocumentRoot "<PATH>/@@NAME@@/front/public"
 </VirtualHost>
 ```
