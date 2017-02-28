@@ -1,0 +1,46 @@
+.footer {
+}
+
+.footer__container {
+  @include container;
+
+  text-align: center;
+}
+
+.footer__nav {
+  display: inline-block;
+  list-style-type: none;
+  padding: 0;
+  vertical-align: middle;
+}
+
+.footer__nav-item {
+  display: inline-block;
+}
+
+.footer__nav-link {
+  display: block;
+  padding: $p ($p / 2);
+  padding-right: 0;
+  text-decoration: none;
+
+  &::after {
+    display: inline-block;
+    height: $p;
+    padding-left: $p / 2;
+    content: ' ';
+    border-right: 1px solid #ccc;
+    vertical-align: middle;
+
+    .footer__nav:last-child .footer__nav-item:last-child & {
+      display: none;
+    }
+  }
+}
+.footer__nav-link--sm {
+  padding: $p ($p / 4);
+}
+
+.footer__nav-sr-text {
+  @include sr-only;
+}

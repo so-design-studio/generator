@@ -1,0 +1,35 @@
+machine:
+  python:
+    version: 2.7.11
+  node:
+    version: 6.1.0
+  # php:
+  #   version: 7.0.7
+  # ruby:
+  #   version: 2.3.3
+
+  environment:
+    deploy_dir: deploy
+
+dependencies:
+  cache_directories:
+    - front/node_modules
+    - front/bower_components
+
+  override:
+    - bin/prep ci
+    - git clone "git@github.com:so-design-studio/so-ops.git" $HOME/ops && $_/bin/prep ci
+
+test:
+  override:
+    - bin/test
+
+deployment:
+  production:
+    branch: master
+    commands:
+      - $HOME/ops/bin/deploy ansistrano @@NAME@@
+  staging:
+    branch: develop
+    commands:
+      - $HOME/ops/bin/deploy ansistrano staging

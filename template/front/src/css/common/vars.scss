@@ -1,0 +1,97 @@
+// --- variables ---
+
+// sizing
+$rem: 16px;
+$p:   1.5rem;
+
+$header: 3rem;
+
+// breakpoints
+$breakpoint-first: tablet;
+$breakpoints: (
+  tablet:  640,
+  desktop: 1100,
+  massive: 1400,
+);
+
+// colours
+$base:   #000;
+$bg:     #fff;
+$accent: #ccc;
+
+// transitions
+$transition: 0.3s ease;
+
+// etc
+$max: 99999px;
+
+
+// --- mixins & functions ---
+
+// breakpoints
+
+@function bp($size) {
+  @return map-get($breakpoints, $size) * 1px;
+}
+@mixin mq($size) {
+  @include breakpoint(bp($size)) { @content; }
+}
+
+@mixin mobile {
+  @include breakpoint(max-width (bp($breakpoint-first) - 1px)) {
+    @content;
+  }
+}
+@mixin tablet {
+  @include breakpoint(bp(tablet))  { @content; }
+}
+@mixin desktop {
+  @include breakpoint(bp(desktop)) { @content; }
+}
+@mixin massive {
+  @include breakpoint(bp(massive)) { @content; }
+}
+
+@mixin container {
+  @include mq($breakpoint-first) {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+    position: relative;
+  }
+  @each $name, $size in $breakpoints {
+    @include mq($name) {
+      max-width: bp($name);
+    }
+  }
+}
+
+
+// transitions
+
+@mixin animate($props...) {
+  $transitions: ();
+  @each $prop in $props {
+    $transitions: append($transitions, $prop $transition, comma);
+  }
+
+  transition: $transitions;
+}
+
+
+// visibility
+
+@mixin nav-toggled {
+  html[data-nav-toggled="1"] & {
+    @include mobile {
+      @content;
+    }
+  }
+}
+
+@mixin sr-only {
+  font-size: 1px;
+  position: absolute;
+  top: -$max;
+  left: -$max;
+}

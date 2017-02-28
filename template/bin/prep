@@ -1,0 +1,45 @@
+#!/bin/bash
+
+cd "${0%/*}/.." # script is in bin/
+
+function log {
+  echo "
+--- $@
+"
+}
+
+if [ "$1" != 'ci' ]; then
+  cd front
+    log yarn
+      yarn
+    log bower
+      bower install
+
+  cd ../back
+    # backend prep - eg. composer/bundler/etc. here
+
+else
+  if [ -z "$CI" ]; then
+    echo 'should only be run from ci'
+    exit 1
+  fi
+
+  cd front
+    log 'yarn'
+      yarn || (rm -rf node_modules && npm install)
+    log 'install bower'
+      yarn global add bower
+    log 'bower'
+      bower install
+    log 'build front'
+      npm run build || exit 2
+
+  cd ../back
+    # ci-specific backend prep here. remember to '|| exit 3' for important tasks
+
+  cd ..
+    log 'copy to deploy dir'
+      mkdir -p deploy
+      cp -R front/dist deploy/front
+      cp -R back deploy/back
+fi

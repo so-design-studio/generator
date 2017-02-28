@@ -1,0 +1,15 @@
+{
+  "name": "@@NAME@@",
+  "version": "1.0.0",
+  "description": "@@NAME@@",
+  "main": "gulpfile.babel.js",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "normalize-css": "^5.0.0",
+    "breakpoint-sass": "^2.7.1",
+    "typographic": "^2.9.3",
+    "plyr": "^2.0.11",
+    "components-font-awesome": "^4.7.0"
+  },
+  "private": true
+}

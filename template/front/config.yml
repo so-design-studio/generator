@@ -1,0 +1,60 @@
+dev_server:
+  #domain: @@OPS_NAMESPACE@@-@@NAME@@.dev
+  port:   3001
+  back:   false
+
+paths:
+  dist: dist
+
+  html:
+    watch:
+      pages: src/html/{data,helpers,pages}/**/*
+      reset: src/html/{layouts,partials}/**/*.html
+
+    src:      src/html/pages/**/*.{html,hbs,handlebars}
+    root:     src/html/pages/
+    layouts:  src/html/layouts/
+    partials: src/html/partials/
+    data:     src/html/data/
+    helpers:  src/html/helpers/
+
+  css:
+    watch: src/css/**/*.scss
+    entry: src/css/main.scss
+    include:
+      - bower_components
+
+  js:
+    watch: src/js/**/*.jsx
+    entry: src/js/main.jsx
+    include:
+      - node_modules
+      - bower_components
+      - src/js/lib
+    exclude_loaders:
+      - node_modules
+      - bower_components
+
+  img:
+    watch: src/img/**/*
+    include: src/img/**/*
+    output_dir: img
+
+  fonts:
+    watch: src/fonts/**/*
+    include:
+      - src/fonts/**/*
+      - bower_components/components-font-awesome/fonts/**/*
+    output_dir: fonts
+
+  etc:
+    - src/etc/**/*
+
+  backend:
+    - ../back/*.html*
+    - ../back/*.{php,rb,js,yml}
+
+autoprefixer_compatibility:
+  - last 2 versions
+  - ie >= 9
+  - ios >= 7

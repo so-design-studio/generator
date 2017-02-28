@@ -1,0 +1,9 @@
+#!/bin/bash
+
+cd "${0%/*}"
+
+cd front
+npm test
+
+# cd back
+# # add any backend tests here

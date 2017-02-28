@@ -1,0 +1,29 @@
+.header {
+  height: $header;
+  background-color: $accent;
+}
+
+.header__container {
+  @include container;
+}
+
+.header__logo {
+  line-height: $header;
+}
+
+.header__nav-toggle {
+  height: $header;
+  padding: 0 $p;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+
+  @include tablet {
+    display: none;
+  }
+}
+
+.header__nav-toggle-sr-text {
+  @include sr-only;
+}

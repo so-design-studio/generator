@@ -1,0 +1,43 @@
+.nav {
+  display: none;
+  width: 100%;
+  height: $header;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  @include tablet {
+    display: block;
+  }
+
+  @include nav-toggled {
+    display: block;
+  }
+}
+
+.nav__container {
+  @include container;
+  padding: 0;
+  text-align: right;
+  list-style-type: none;
+}
+.nav__container--sm {
+  @include tablet {
+    display: none;
+  }
+}
+
+.nav__item {
+  display: inline-block;
+}
+
+.nav__link {
+  display: block;
+  height: $header;
+  padding: 0 $p / 2;
+  line-height: $header;
+
+  .nav__item:last-child & {
+    padding-right: 0;
+  }
+}

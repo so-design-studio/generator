@@ -1,0 +1,11 @@
+.main {
+  min-height: calc(100vh - #{$header * 2});
+
+  @include tablet {
+    min-height: 15rem;
+  }
+
+  @include nav-toggled {
+    display: none;
+  }
+}
