@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 cd "${0%/*}/.." # script is in bin/
 
 function log {
@@ -32,10 +34,10 @@ else
     log 'bower'
       bower install
     log 'build front'
-      npm run build || exit 2
+      npm run build
 
   cd ../back
-    # ci-specific backend prep here. remember to '|| exit 3' for important tasks
+    # ci-specific backend prep here
 
   cd ..
     log 'copy to deploy dir'
