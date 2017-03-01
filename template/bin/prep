@@ -12,9 +12,9 @@ function log {
 
 if [ "$1" != 'ci' ]; then
   cd front
-    log yarn
+    log 'yarn'
       yarn
-    log bower
+    log 'bower'
       bower install
 
   cd ../back
