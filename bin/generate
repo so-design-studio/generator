@@ -102,6 +102,9 @@ if ! "$REPLACER" ; then
   exit 6
 fi
 
+log "run prep script"
+bin/prep
+
 log "commit template files"
 git add .
 git commit -m "generate"
@@ -110,9 +113,6 @@ if [ ! -z "$GITHUB" ]; then
   log "github: push $DEVELOP_BRANCH"
   git push --set-upstream origin "$DEVELOP_BRANCH"
 fi
-
-log "run prep script"
-bin/prep
 
 # which gittower > /dev/null && gittower .
 # which atom > /dev/null && atom .
