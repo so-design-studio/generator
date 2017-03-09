@@ -29,8 +29,6 @@ else
   cd front
     log 'yarn'
       yarn || (rm -rf node_modules && npm install)
-    log 'install bower'
-      yarn global add bower
     log 'bower'
       bower install
     log 'build front'
