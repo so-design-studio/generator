@@ -1,5 +1,5 @@
 dev_server:
-  #domain: @@OPS_NAMESPACE@@-@@NAME@@.dev
+  domain: @@OPS_NAMESPACE@@-@@NAME@@.dev
   port:   3001
   back:   false
 
