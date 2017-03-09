@@ -2,7 +2,7 @@
 
 cd "${0%/*}"
 
-cd front
+cd ../front
 npm test
 
 # cd back
