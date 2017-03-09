@@ -51,8 +51,8 @@ paths:
     - src/etc/**/*
 
   backend:
-    - ../back/*.html*
-    - ../back/*.{php,rb,js,yml}
+    - ../back/**/*.html*
+    - ../back/**/*.{php,rb,js,yml}
 
 autoprefixer_compatibility:
   - last 2 versions
