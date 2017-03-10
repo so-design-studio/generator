@@ -183,7 +183,8 @@ function devServer(done) {
 
 function reload(done) {
   BrowserSync.reload()
-  done()
+  if(typeof done === 'function')
+    done()
 }
 
 function watch() {
