@@ -32,7 +32,7 @@ else
     log 'bower'
       bower install
     log 'build front'
-      npm run build
+      npm run build || (rm -rf node_modules && yarn && npm run build)
 
   cd ../back
     # ci-specific backend prep here
