@@ -14,6 +14,7 @@ import Webpack       from 'webpack'
 import WebpackStream from 'webpack-stream'
 import Named         from 'vinyl-named'
 import Lost          from 'lost'
+import PostcssAnt    from 'postcss-ant'
 import Pixrem        from 'pixrem'
 import Autoprefixer  from 'autoprefixer'
 import { exec }      from 'child_process'
@@ -134,7 +135,7 @@ function css() {
     })
       .on('error', $.sass.logError))
     .pipe($.postcss([
-      Lost(),
+      PostcssAnt(),
       Autoprefixer({ browsers: CONFIG.autoprefixer_compatibility }),
       Pixrem(),
     ]))
