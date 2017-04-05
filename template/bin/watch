@@ -4,6 +4,6 @@ cd "${0%/*}/.." # script is in bin/
 
 cd front
 npm start # &
-# cd back
+# cd ../back
 # rails s &
 # wait
