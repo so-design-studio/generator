@@ -25,5 +25,6 @@ bin/prep
 <VirtualHost *:80>
   ServerName assets.@@OPS_NAMESPACE@@-@@NAME@@.dev
   DocumentRoot "<PATH>/@@NAME@@/front/dist"
+  Header set Access-Control-Allow-Origin "*"
 </VirtualHost>
 ```
