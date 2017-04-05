@@ -55,6 +55,6 @@ paths:
     - ../back/**/*.{php,rb,js,yml}
 
 autoprefixer_compatibility:
-  - last 2 versions
+  - last 3 versions
   - ie >= 9
   - ios >= 7

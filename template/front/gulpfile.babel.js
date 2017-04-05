@@ -13,7 +13,9 @@ import Path          from 'path'
 import Webpack       from 'webpack'
 import WebpackStream from 'webpack-stream'
 import Named         from 'vinyl-named'
+import Rev           from 'gulp-rev'
 import Lost          from 'lost'
+import PostcssAnt    from 'postcss-ant'
 import Pixrem        from 'pixrem'
 import Autoprefixer  from 'autoprefixer'
 import { exec }      from 'child_process'
@@ -134,13 +136,17 @@ function css() {
     })
       .on('error', $.sass.logError))
     .pipe($.postcss([
-      Lost(),
+      PostcssAnt(),
       Autoprefixer({ browsers: CONFIG.autoprefixer_compatibility }),
       Pixrem(),
     ]))
     .pipe($.if(PRODUCTION, $.cssnano()))
     .pipe($.if(!PRODUCTION, $.sourcemaps.write()))
+    // Uncomment if using manifest
+    // .pipe($.if(PRODUCTION, $.rev()))
     .pipe(Gulp.dest(dist()))
+    // .pipe($.if(PRODUCTION, $.rev.manifest()))
+    // .pipe($.if(PRODUCTION, Gulp.dest(dist())))
     .pipe(BrowserSync.reload({ stream: true }))
 }
 
