@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: node:6.10.2
+    working_directory: ~/so-generator
+
+    steps:
+      - checkout
+      - name: Install Yarn
+        run: |
+          curl -o- -L https://yarnpkg.com/install.sh | bash
+          export PATH="$PATH:`yarn global bin`"
+      - name: Install Bower
+        run: yarn global add bower
+
+      - name: Test
+        run: cd .. && so-generator/bin/generate test
