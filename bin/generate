@@ -93,7 +93,7 @@ git checkout "$DEVELOP_BRANCH"
 rm README.md
 
 log "duplicate project template"
-if ! cp -rf "$TEMPLATE_DIR/" "$PROJECT_DIR" ; then
+if ! cp -rf "$TEMPLATE_DIR/." "$PROJECT_DIR" ; then
   echo "error: couldn't duplicate project template"
   exit 5
 fi
