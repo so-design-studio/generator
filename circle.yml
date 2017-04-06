@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: node:6.10.2
-    working_directory: ~/so-generator
+    working_directory: ~/generator
 
     steps:
       - checkout
@@ -15,4 +15,4 @@ jobs:
         run: yarn global add bower
 
       - name: Test
-        run: cd .. && so-generator/bin/generate test
+        run: cd .. && generator/bin/generate test
