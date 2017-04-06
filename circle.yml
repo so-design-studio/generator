@@ -15,8 +15,14 @@ jobs:
           name: Install Bower
           command: yarn global add bower
 
+      - run:
+          name: Git config
+          command: |
+            git config --global user.email "you@example.com"
+            git config --global user.name  "Your Name"
+
       - checkout
-      
+
       - run:
           name: Test
           command: cd .. && generator/bin/generate test
