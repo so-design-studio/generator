@@ -72,7 +72,10 @@ else {
   wpOptions.plugins = [
     new Webpack.optimize.UglifyJsPlugin({
       compress: { warnings: false }
-    })
+    }),
+    new Webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
   ]
 }
 
