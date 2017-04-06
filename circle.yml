@@ -6,13 +6,17 @@ jobs:
     working_directory: ~/generator
 
     steps:
-      - checkout
-      - name: Install Yarn
-        run: |
-          curl -o- -L https://yarnpkg.com/install.sh | bash
-          export PATH="$PATH:`yarn global bin`"
-      - name: Install Bower
-        run: yarn global add bower
+      - run:
+          name: Install Yarn
+          command: |
+            curl -o- -L https://yarnpkg.com/install.sh | bash
+            export PATH="$PATH:`yarn global bin`"
+      - run:
+          name: Install Bower
+          command: yarn global add bower
 
-      - name: Test
-        run: cd .. && generator/bin/generate test
+      - checkout
+      
+      - run:
+          name: Test
+          command: cd .. && generator/bin/generate test
