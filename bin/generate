@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 export OPS_NAMESPACE="so"
 export DEVELOP_BRANCH="develop"
 export GITHUB_PROJECT_DESCRIPTION="New project. TODO: add description and tags"
