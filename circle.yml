@@ -26,7 +26,3 @@ jobs:
       - run:
           name: Test
           command: cd .. && generator/bin/generate test
-
-      - store_artifacts:
-          path: ~/test
-          destination: build
