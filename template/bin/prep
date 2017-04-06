@@ -15,7 +15,7 @@ if [ "$1" != 'ci' ]; then
     log 'yarn'
       yarn
     log 'bower'
-      bower install
+      bower install --allow-root
 
   cd ../back
     # backend prep - eg. composer/bundler/etc. here
