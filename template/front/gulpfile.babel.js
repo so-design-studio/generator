@@ -42,7 +42,7 @@ const dist = (p) => p ? `${PATHS.dist}/${p}` : PATHS.dist
 const wpOptions = {
   output: { filename: '[name].js' },
   resolve: {
-    modules: PATHS.js.include,
+    modules: ['@babel/babel-polyfill', ...PATHS.js.include],
     extensions: [
       '.js',
       '.jsx',
@@ -70,11 +70,10 @@ if(!PRODUCTION) {
 }
 else {
   wpOptions.plugins = [
-    new Webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false }
-    }),
     new Webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
     }),
   ]
 }

@@ -1,35 +1,54 @@
-machine:
-  python:
-    version: 2.7.11
-  node:
-    version: 6.1.0
-  # php:
-  #   version: 7.0.7
-  # ruby:
-  #   version: 2.3.3
+version: 2
+jobs:
+  build:
+    docker:
+      - image: sodesign/ci:latest
+    working_directory: /root/repo
 
-  environment:
-    deploy_dir: deploy
+    steps:
+      - checkout
 
-dependencies:
-  cache_directories:
-    - front/node_modules
-    - front/bower_components
+      - restore_cache:
+          keys:
+            - @@NAME@@-v1-{{ .Branch }}-{{ checksum "front/yarn.lock" }}-{{ checksum "back/composer.lock" }}
 
-  override:
-    - bin/prep ci
-    - git clone "git@github.com:so-design-studio/so-ops.git" $HOME/ops && $_/bin/prep ci
+      - run:
+          name: Yarn
+          command: |
+            cd front
+            yarn || (rm -rf node_modules && npm install)
+      - run:
+          name: Composer
+          command: |
+            cd back
+            composer selfupdate
+            composer install
+      - run:
+          name: Build front
+          command: |
+            cd front
+            yarn build
 
-test:
-  override:
-    - bin/test
+      - save_cache:
+          key: @@NAME@@-v1-{{ .Branch }}-{{ checksum "front/yarn.lock" }}-{{ checksum "back/composer.lock" }}
+          paths:
+            - front/node_modules
+            - back/vendor
 
-deployment:
-  production:
-    branch: master
-    commands:
-      - $HOME/ops/bin/deploy ansistrano @@NAME@@
-  staging:
-    branch: develop
-    commands:
-      - $HOME/ops/bin/deploy ansistrano staging
+      - deploy:
+          name: Prepare deploy
+          command: |
+            mkdir -p deploy
+            cp -R front/dist deploy/front
+            cp -R back deploy/back
+            cp front/dist/rev-manifest.json deploy/back
+            mkdir back/site/assets/tmp
+      - deploy:
+          name: Deploy
+          command: |
+            set -e
+            if   [ "$CIRCLE_BRANCH" == "master"  ]; then
+              /root/deploy @@NAME@@
+            elif [ "$CIRCLE_BRANCH" == "develop" ]; then
+              /root/deploy staging
+            fi

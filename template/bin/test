@@ -3,7 +3,7 @@
 cd "${0%/*}"
 
 cd ../front
-npm test
+yarn test
 
 # cd back
 # # add any backend tests here

@@ -3,7 +3,7 @@
 cd "${0%/*}/.." # script is in bin/
 
 cd front
-npm start # &
+yarn start # &
 # cd ../back
 # rails s &
 # wait

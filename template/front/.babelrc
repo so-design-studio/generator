@@ -1,4 +1,11 @@
 {
-	"presets": ["latest", "react"],
-  "compact": false
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "debug": true
+      }
+    ]
+  ]
 }

@@ -14,8 +14,6 @@ if [ "$1" != 'ci' ]; then
   cd front
     log 'yarn'
       yarn
-    log 'bower'
-      bower install --allow-root
 
   cd ../back
     # backend prep - eg. composer/bundler/etc. here
@@ -28,11 +26,9 @@ else
 
   cd front
     log 'yarn'
-      yarn || (rm -rf node_modules && npm install)
-    log 'bower'
-      bower install
+      yarn || (rm -rf node_modules && yarn)
     log 'build front'
-      npm run build || (rm -rf node_modules && yarn && npm run build)
+      yarn build || (rm -rf node_modules && yarn && yarn build)
 
   cd ../back
     # ci-specific backend prep here

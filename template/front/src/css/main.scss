@@ -1,11 +1,16 @@
 @charset 'utf-8';
 
 @import './common/vendor';
-@import './common/typography';
 @import './common/vars';
-@import './common/overall';
+@import './common/colours';
+@import './common/typography';
+@import './common/grid';
+@import './common/base';
 
 @import './components/body';
+@import './components/buttons';
+@import './components/forms';
+@import './components/tables';
 
 @import './layout/header';
 @import './layout/nav';

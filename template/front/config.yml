@@ -22,18 +22,16 @@ paths:
     watch: src/css/**/*.scss
     entry: src/css/main.scss
     include:
-      - bower_components
+      - node_modules
 
   js:
     watch: src/js/**/*.jsx
     entry: src/js/main.jsx
     include:
       - node_modules
-      - bower_components
       - src/js/lib
     exclude_loaders:
       - node_modules
-      - bower_components
 
   img:
     watch: src/img/**/*
@@ -44,7 +42,6 @@ paths:
     watch: src/fonts/**/*
     include:
       - src/fonts/**/*
-      - bower_components/components-font-awesome/fonts/**/*
     output_dir: fonts
 
   etc:
@@ -53,8 +50,3 @@ paths:
   backend:
     - ../back/**/*.html*
     - ../back/**/*.{php,rb,js,yml}
-
-autoprefixer_compatibility:
-  - last 3 versions
-  - ie >= 9
-  - ios >= 7

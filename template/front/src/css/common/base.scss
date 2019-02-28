@@ -1,0 +1,30 @@
+/* apply a natural box layout model to all elements, but allowing components to change */
+html {
+  box-sizing: border-box;
+}
+
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+.wrap {
+  @include container();
+  padding: 0 $gutter-window*0.5;
+  @include tablet {
+    padding: 0 $gutter-window;
+  }
+}
+
+// For use on spans inside links.
+.u-expander {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: transparent;
+  transition: background 0.2s ease;
+  &:hover {
+    background-color: rgba($white, 0.2);
+  }
+}

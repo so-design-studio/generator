@@ -1,0 +1,29 @@
+$gutter-h: 10px;
+$gutter-v: 30px;
+$gutter-window: $gutter-h*5;
+
+@ant-gutters #{$gutter-h}, #{$gutter-v};
+
+// Set up individual grid classes
+@for $i from 1 through 5 {
+    @for $j from 1 through $i {
+      .r#{$j}-#{$i} {
+        position: relative;
+        width: 100%;
+        margin-right: 0;
+        @include desktop-s {
+          width: sizes(#{$j}/#{$i}) pluck(1);
+          margin-right: $gutter-h;
+          &:last-of-type {
+            margin-right: 0;
+          }
+        }
+        @include massive {
+          .row {
+            width: 100%;
+            margin-left: auto;
+          }
+        }
+      }
+    }
+  }
